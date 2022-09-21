@@ -39,9 +39,12 @@ gem "jbuilder"
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
+gem 'simplecov', require: false, group: :test
+
+
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
-
+gem 'dotenv-rails', groups: [:development, :test]
 # Use Sass to process CSS
 # gem "sassc-rails"
 
@@ -52,6 +55,9 @@ group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
  gem "debug", platforms: %i[ mri mingw x64_mingw ]
  gem 'better_errors', '~> 2.9', '>= 2.9.1'
+ gem 'rspec-rails', '~> 6.0.0.rc1'
+ gem 'factory_bot_rails'
+#  gem 'database_cleaner-active-record'
 end
 
 group :development do
@@ -59,7 +65,8 @@ group :development do
   gem "web-console"
   gem 'htmlbeautifier'
   gem 'rubocop'
-  gem 'rspec-rails', '~> 6.0.0.rc1'
+
+
 
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
@@ -67,5 +74,6 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+  gem "net-http"
 end
 
