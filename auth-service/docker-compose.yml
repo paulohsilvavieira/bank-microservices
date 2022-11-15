@@ -1,0 +1,40 @@
+version: '3.9'
+volumes:
+  node_modules:
+services:
+  auth_service:
+    build:
+      context: .
+    volumes:
+      - .:/app
+    container_name: clean_arch_node_ts
+    environment:
+      - PORT=3000
+      - PG_HOST=clean_arch_node_ts_db
+      - PG_PORT=5432
+      - PG_USERNAME=root
+      - PG_DATABASE=clean-arch-node-ts
+      - PG_PASSWORD=admin
+    ports:
+      - '3000:3000'
+      - '9228:9228'
+    command: npm run dev
+  #   depends_on:
+  #     clean_arch_node_ts_db:
+  #       condition: service_healthy
+  # clean_arch_node_ts_db:
+  #   image: postgres:latest
+  #   container_name: clean_arch_node_ts_db
+  #   environment:
+  #     POSTGRES_USER: root
+  #     POSTGRES_PASSWORD: admin
+  #     POSTGRES_DB: clean-arch-node-ts
+  #   volumes:
+  #     - ${HOME}/docker/postgresql/clean_arch_node_ts_db:/var/lib/postgresql
+  #   ports:
+  #     - "5434:5432"
+  #   healthcheck:
+  #     test: [ "CMD-SHELL", "pg_isready" ]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
