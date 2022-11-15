@@ -1,9 +1,9 @@
 import faker from 'faker'
 import { MockProxy,mock } from 'jest-mock-extended'
 import { AuthentitcationError } from '@/domain/errors/auth-error'
-import { Encrypter } from '@/domain/contracts/crypto/encrypter'
-import { VerifyAccountRepo } from '@/domain/contracts/repositories/verify-account-repo'
-import { TokenGenerator } from '@/domain/contracts/token/token-generator'
+import { Encrypter } from '@/domain/protocols/crypto/encrypter'
+import { VerifyAccountRepo } from '@/domain/protocols/repositories/verify-account-repo'
+import { TokenGenerator } from '@/domain/protocols/token/token-generator'
 import { AuthenticateUserUsecase } from '@/domain/usecases/authenticate-user-usecase'
 
 /**

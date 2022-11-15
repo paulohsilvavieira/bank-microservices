@@ -1,7 +1,7 @@
-import { Encrypter } from '../contracts/crypto/encrypter'
-import { VerifyAccountRepo } from '../contracts/repositories/verify-account-repo'
-import { TokenGenerator } from '../contracts/token/token-generator'
-import { AuthenticateUser } from '../contracts/usecases/auth'
+import { Encrypter } from '../protocols/crypto/encrypter'
+import { VerifyAccountRepo } from '../protocols/repositories/verify-account-repo'
+import { TokenGenerator } from '../protocols/token/token-generator'
+import { AuthenticateUser } from '../protocols/usecases/auth'
 import { AuthentitcationError } from '../errors/auth-error'
 
 export class AuthenticateUserUsecase implements AuthenticateUser {
