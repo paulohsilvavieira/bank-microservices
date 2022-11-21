@@ -1,4 +1,4 @@
-import { AuthentitcationError } from '../../errors/auth-error'
+import { AuthenticationError } from '../../errors/auth-error'
 
 export interface AuthenticateUser {
   execute: (params: AuthenticateUser.Params) => Promise<AuthenticateUser.Result>
@@ -11,6 +11,6 @@ export namespace AuthenticateUser {
   }
   export type Result ={
     token: string | null
-    error: AuthentitcationError | null
+    error: AuthenticationError | null
   }
 }

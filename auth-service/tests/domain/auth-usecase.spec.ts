@@ -1,6 +1,6 @@
 import faker from 'faker'
 import { MockProxy,mock } from 'jest-mock-extended'
-import { AuthentitcationError } from '@/domain/errors/auth-error'
+import { AuthenticationError } from '@/domain/errors/auth-error'
 import { Encrypter } from '@/domain/protocols/crypto/encrypter'
 import { VerifyAccountRepo } from '@/domain/protocols/repositories/verify-account-repo'
 import { TokenGenerator } from '@/domain/protocols/token/token-generator'
@@ -53,7 +53,7 @@ describe('Authentication User Usecase', () => {
   test('Return error Authentication if not found user auth', async () => {
     authRepo.verifyAccount.mockResolvedValueOnce({ authId: undefined })
     const result = await sut.execute(params)
-    expect(result.error).toEqual(new AuthentitcationError())
+    expect(result.error).toEqual(new AuthenticationError())
     expect(result.token).toBeUndefined()
   })
 })

@@ -2,7 +2,7 @@ import { Encrypter } from '../protocols/crypto/encrypter'
 import { VerifyAccountRepo } from '../protocols/repositories/verify-account-repo'
 import { TokenGenerator } from '../protocols/token/token-generator'
 import { AuthenticateUser } from '../protocols/usecases/auth'
-import { AuthentitcationError } from '../errors/auth-error'
+import { AuthenticationError } from '../errors/auth-error'
 
 export class AuthenticateUserUsecase implements AuthenticateUser {
   constructor (
@@ -21,7 +21,7 @@ export class AuthenticateUserUsecase implements AuthenticateUser {
     if (!authId) {
       return {
         token: undefined,
-        error: new AuthentitcationError()
+        error: new AuthenticationError()
       }
     }
     const { token } = this.token.generate(authId)
