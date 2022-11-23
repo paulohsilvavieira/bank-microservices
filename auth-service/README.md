@@ -2,7 +2,6 @@
   Clean Arch Node TS
 </h1>
 
-
 <p align="center">
   <a href="https://www.typescriptlang.org/">
     <img alt="Typescript" src="https://img.shields.io/badge/maintained%20with-Typescript-blue"/>
