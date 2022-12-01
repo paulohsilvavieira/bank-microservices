@@ -1,3 +1,3 @@
 export interface TokenGenerator{
-  generate: (plainText: string) => {token: string}
+  generate: (payload: any) => {token: string}
 }
