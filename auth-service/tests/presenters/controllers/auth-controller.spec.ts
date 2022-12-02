@@ -1,12 +1,11 @@
 import { AuthenticateUser } from '@/domain/protocols/usecases/auth'
 import { MockProxy, mock } from 'jest-mock-extended'
-import { AuthController } from '@/presenters/controllers/auth-controller'
-import { ok, serverError, unauthorized } from '@/presenters/helpers/http-status'
+import { AuthController } from '@/presenters/http/controllers/auth-controller'
+import { ok, serverError, unauthorized } from '@/presenters/http/helpers/http-status'
 import { AuthenticationError } from '@/domain/errors/auth-error'
 import { throwError } from '@/tests/domain/mock/throw-error-mock'
 
 describe('AuthController', () => {
-
   const httpRequest = {
     body: {
       accountNumber: '123456-9',
