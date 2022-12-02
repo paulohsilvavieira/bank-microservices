@@ -1,10 +1,9 @@
-import { HttpResponse } from "../contracts/http";
+import { HttpResponse } from '../protocols/http'
 
 export const ok = (body: any): HttpResponse => ({
   statusCode: 200,
-  body,
+  body
 })
-
 
 export const badRequest = (body: any): HttpResponse => ({
   statusCode: 400,
