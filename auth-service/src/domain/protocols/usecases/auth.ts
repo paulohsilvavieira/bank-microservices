@@ -1,7 +1,7 @@
 import { AuthenticationError } from '../../errors/auth-error'
 
 export interface AuthenticateUser {
-  execute: (params: AuthenticateUser.Params) => Promise<AuthenticateUser.Result>
+  execute: (params: AuthenticateUser.Params) => Promise<Partial<AuthenticateUser.Result>>
 }
 
 export namespace AuthenticateUser {
@@ -10,7 +10,7 @@ export namespace AuthenticateUser {
     password: string
   }
   export type Result ={
-    token: string | null
-    error: AuthenticationError | null
+    token: string
+    error: AuthenticationError
   }
 }
