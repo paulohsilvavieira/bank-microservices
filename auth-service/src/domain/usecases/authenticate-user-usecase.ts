@@ -1,34 +1,37 @@
-import { Encrypter } from '../protocols/crypto/encrypter'
-import { VerifyAccountRepo } from '../protocols/repositories/verify-account-repo'
+import { GetAccountAuthRepo } from '../protocols/repositories/get-account-auth-repo'
 import { TokenGenerator } from '../protocols/token/token-generator'
 import { AuthenticateUser } from '../protocols/usecases/auth'
 import { AuthenticationError } from '../errors/auth-error'
+import { EncrypterCompare } from '../protocols/bcrypt'
 
 export class AuthenticateUserUsecase implements AuthenticateUser {
   constructor (
-    private readonly authRepo: VerifyAccountRepo,
-    private readonly crypto: Encrypter,
-    private readonly token: TokenGenerator) {}
+    private readonly authRepo: GetAccountAuthRepo,
+    private readonly bcrypt: EncrypterCompare,
+    private readonly jwtToken: TokenGenerator) {}
 
-  async execute (params: AuthenticateUser.Params): Promise<AuthenticateUser.Result> {
-    const { encryptedText } = this.crypto.encrypt(params.password)
+  async execute (params: AuthenticateUser.Params): Promise<Partial<AuthenticateUser.Result>> {
+    const authUser = await this.authRepo.getAccount({ accountNumber: params.accountNumber })
 
-    const { authId } = await this.authRepo.verifyAccount({
-      accountNumber: params.accountNumber,
-      password: encryptedText
-    })
-
-    if (!authId) {
+    if (!authUser) {
       return {
-        token: undefined,
         error: new AuthenticationError()
       }
     }
-    const { token } = this.token.generate(authId)
 
+    const isCorrectPassword = this.bcrypt.compare({
+      hash: authUser.password,
+      plainText: params.password
+    })
+
+    if (isCorrectPassword) {
+      const { token } = this.jwtToken.generate(authUser.authId)
+      return {
+        token
+      }
+    }
     return {
-      token,
-      error: undefined
+      error: new AuthenticationError()
     }
   }
 }
